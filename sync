@@ -5,14 +5,14 @@
 
 # Check parameters
 if [ -z "$1" ]; then
-	echo "Usage: `basename $0` host1 host2 user password"
+	echo "Usage: `basename $0` host1 port1 host2 port2 user password"
 	exit 1
-elif [ $# -ne 4 ]; then
-	echo "Must use 4 parameters! Usage: `basename $0` host1 host2 user password"
+elif [ $# -ne 6 ]; then
+	echo "Must use 6 parameters! Usage: `basename $0` host1 port1 host2 port2 user password"
 fi
 
 # check two databases and store data into a file
-mk-table-checksum --ignore-databases mysql h=$1,u=$3,p=$4 h=$2,u=$3,p=$4 | mk-checksum-filter | grep -n "" >/tmp/chk.txt
+mk-table-checksum --ignore-databases mysql h=$1,u=$5,p=$6,P=$2 h=$3,u=$5,p=$6,P=$4 | mk-checksum-filter | grep -n "" >/tmp/chk.txt
 
 # check the file and take what we need
 l=`cat /tmp/chk.txt|cut -d: -f1|tail -1`
@@ -28,7 +28,7 @@ v1=`cat /tmp/chk.txt|grep $i:|sed s/:/\ /|awk '{print $2}'`
 v2=`cat /tmp/chk.txt|grep $i:|sed s/:/\ /|awk '{print $3}'`
 
 # execute the sync using our variables
-mk-table-sync --execute u=$3,p=$4,D=$v1,t=$v2 $1 $2
+mk-table-sync --execute D=$v1,t=$v2,h=$1,u=$5,p=$6,P=$2 h=$3,u=$5,p=$6,P=$4
 
 i=`echo $i+1|bc`
 done
