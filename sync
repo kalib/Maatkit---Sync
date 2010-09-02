@@ -20,6 +20,7 @@ i="1"
 
 if [ -z $l ] ; then
 #echo "No sync need to be done."
+exit 0
 else
 while [ $i -le $l ] ; do
 
