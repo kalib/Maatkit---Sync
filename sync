@@ -5,7 +5,7 @@
 
 # Check parameters
 if [ -z "$1" ]; then
-	echo "Usage: `basename $0` host1 port1 host2 port2 user password"
+	echo "Usage: `basename $0` host1 port1 user1 password1 host2 port2 user2 password2"
 	exit 1
 elif [ $# -ne 8 ]; then
 	echo "Must use 8 parameters! Usage: `basename $0` host1 port1 user1 password1 host2 port2 user2 password2"
