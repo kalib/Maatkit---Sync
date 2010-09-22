@@ -1,2 +1,6 @@
 First version of Sync Script for Maatkit
 2010, September 02 - Marcelo Cavalcante - kalib (kalibslack@gmail.com)
+
+Changelog
+
+09/22/2010 - As maatkit has a bug when using two servers on the same client, I decided to run one server at a time. Worked fine this way.

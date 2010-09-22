@@ -12,7 +12,10 @@ elif [ $# -ne 8 ]; then
 fi
 
 # check two databases and store data into a file
-mk-table-checksum --ignore-databases mysql h=$1,u=$3,p=$4,P=$2 h=$5,u=$7,p=$8,P=$6 | mk-checksum-filter | grep -n "" >/tmp/chk.txt
+#mk-table-checksum --ignore-databases mysql h=$1,u=$3,p=$4,P=$2 h=$5,u=$7,p=$8,P=$6 | mk-checksum-filter | grep -n "" >/tmp/chk.txt
+~/bin/mk-table-checksum --ignore-databases mysql h=$1,u=$3,p=$4,P=$2 >> checksum_1.txt
+~/bin/mk-table-checksum --ignore-databases mysql h=$5,u=$7,p=$8,P=$6 >> checksum_2.txt
+mk-checksum-filter checksum_1.txt checksum_2.txt | grep -n "" >/tmp/chk.txt
 
 # check the file and take what we need
 l=`cat /tmp/chk.txt|cut -d: -f1|tail -1`
